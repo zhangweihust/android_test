@@ -26,10 +26,20 @@ import com.google.gson.Gson;
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import com.googlecode.concurrentlinkedhashmap.EntryWeigher;
 import com.iflytek.msc.Constants;
+
+import com.zhangwei.common.adapter.AbstractAdapter;
+import com.zhangwei.common.adapter.CommonAdapter;
 import com.zhangwei.common.cache.WebImageView;
 import com.zhangwei.common.gson.GsonRequest;
 import com.zhangwei.common.gson.GsonTest;
 import com.zhangwei.common.gson.HttpClientTask;
+import com.zhangwei.common.twolist.ImageWrapper;
+import com.zhangwei.common.twolist.ImgResource;
+import com.zhangwei.common.twolist.MultiColumnListView;
+import com.zhangwei.common.twolist.SimpleViewBuilder;
+import com.zhangwei.common.twolist.MultiColumnListView.OnLoadMoreListener;
+import com.zhangwei.common.utils.ActivityUtil;
+
 import com.zhangwei.msc.QISR;
 import com.zhangwei.msc.QTTS;
 import com.zhangwei.service.CommonService;
@@ -42,6 +52,13 @@ public class MainActivity extends Activity {
 	MyHandler handler;
 	public TextView tv1;
 	public WebImageView im1;
+	
+	
+	//2listview
+	protected AbstractAdapter<ImageWrapper> mAdapter = null;
+	public static final int PULL_TO_REFRESH_ID = 1008611;
+	protected MultiColumnListView mWaterfallView = null;
+	
 	
 	public static class MyHandler extends Handler{ 
 		WeakReference<MainActivity> mActivity;
@@ -67,6 +84,8 @@ public class MainActivity extends Activity {
 
 		}
 	}
+	
+	
 	
 	
 	@Override
@@ -113,6 +132,8 @@ public class MainActivity extends Activity {
 		//task.execute("http://v.looklook.cn/vs/api/nearVideo", gson.toJson(req));
 	
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -149,7 +170,7 @@ public class MainActivity extends Activity {
 		}
 
 
-	};
+	}
 	
 	private class QISRTask extends AsyncTask<Handler, String, String> {
 		@Override
@@ -178,6 +199,33 @@ public class MainActivity extends Activity {
 		protected void onProgressUpdate (String... values){
 			
 		}
-	};
+	}
+	
+	protected void init(){
+		setContentView(R.layout.act_sample);
+		mWaterfallView = (MultiColumnListView) findViewById(R.id.list);
+		initUIAction();
+	}
+	
+	protected void initUIAction() {
+		mAdapter = new CommonAdapter<ImageWrapper>(getLayoutInflater(), new SimpleViewBuilder());
+		mWaterfallView.setAdapter(mAdapter);
+		mAdapter.update(ImgResource.genData());
+		mWaterfallView.setOnLoadMoreListener(new OnLoadMoreListener() {
+			@Override
+			public void onLoadMore() {
+				mAdapter.add(ImgResource.genData());
+				mAdapter.notifyDataSetChanged();
+				ActivityUtil.show(MainActivity.this, "到List底部自动加载更多数据");
+				//5秒后完成
+				new Handler().postDelayed(new Runnable(){
+					@Override
+					public void run() {
+						mWaterfallView.onLoadMoreComplete();
+					}
+				}, 5000);
+			}
+		});
+	}
 
 }
