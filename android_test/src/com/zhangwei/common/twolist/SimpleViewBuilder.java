@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-12-6
+ * @author : 
+ * @email  : 
+ * @date   : 
  * @desc   : TODO
  */
 public class SimpleViewBuilder extends ViewBuilder<ImageWrapper> {

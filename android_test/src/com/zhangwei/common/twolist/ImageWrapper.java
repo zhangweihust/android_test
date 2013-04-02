@@ -1,11 +1,6 @@
 package com.zhangwei.common.twolist;
 
-/**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-12-6
- * @desc   : TODO
- */
+
 public class ImageWrapper {
 	/**
 	 * 图片宽度
