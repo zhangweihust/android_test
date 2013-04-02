@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.nutz.json.*;
 
 
 import java.util.concurrent.ConcurrentMap;
