@@ -37,11 +37,11 @@ public class ImgResource {
 	};
 	
 	private static Random RND = new Random();
-	public static List<ImageWrapper> genData(){
-		List<ImageWrapper> data = new ArrayList<ImageWrapper>();
+	public static List<NearByVideoItemWrapper> genData(){
+		List<NearByVideoItemWrapper> data = new ArrayList<NearByVideoItemWrapper>();
 		int count = ImgResource.imageResource.length/2 + RND.nextInt(ImgResource.imageResource.length/2);
 		for(int i=0;i<count;i++){
-			ImageWrapper iw = new ImageWrapper();
+			NearByVideoItemWrapper iw = new NearByVideoItemWrapper();
 			iw.width = 230;
 			iw.height = 230 + i*20;
 			iw.id = i;

@@ -6,11 +6,11 @@
     android:orientation="vertical"
     android:padding="7dp" >
 
-    <ImageView
+    <com.zhangwei.common.cache.WebImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"></ImageView>
+        android:scaleType="centerInside"></com.zhangwei.common.cache.WebImageView>
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"

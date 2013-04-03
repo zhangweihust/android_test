@@ -57,7 +57,7 @@ public class HttpRequestUtils {
 		}
 
 
-		if (httpResponse.getStatusLine().getStatusCode() == 200) {
+		if (httpResponse!=null && httpResponse.getStatusLine().getStatusCode() == 200) {
 			// 第3步：使用getEntity方法获得返回结果
 			String result = null;
 			try {
@@ -72,9 +72,12 @@ public class HttpRequestUtils {
 			}
 			// 去掉返回结果中的"\r"字符，否则会在结果字符串后面显示一个小方格
 			//tvQueryResult.setText(result.replaceAll("\r", ""));
+		}else if(httpResponse==null){
+			Log.e(TAG, "httpResponse error: null");
 		}else{
 			Log.e(TAG, "httpResponse error:" + httpResponse.getStatusLine().getStatusCode());
 		}
+		
 		
 		return null;
 	}

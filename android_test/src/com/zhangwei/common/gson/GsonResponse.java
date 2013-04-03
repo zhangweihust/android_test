@@ -1,5 +1,6 @@
 package com.zhangwei.common.gson;
 
+
 public  class GsonResponse {
 	
 	//1.手机UA协议
@@ -283,9 +284,9 @@ public  class GsonResponse {
 	
 	//46.	搜索附近视频（除自己视频外）
 	public static class nearVideoResponse{
-		int status; //0可用、1不可用	
-		nearVideoItem[] items;
-		int radius; //公里
+		public String status; //0可用、1不可用	
+		public nearVideoItem[] items;
+		public String radius; //公里
 	}
 	
 	//47.	获取标签
@@ -480,8 +481,9 @@ public  class GsonResponse {
 	}
 	
 	public static class FriendListResponse{
-		int status;
+		String status;
 		User[] items;
+		String radius;
 	}
 	
 	
@@ -495,6 +497,8 @@ public  class GsonResponse {
 		String userId;
 	    String portraitUrl; //头像URL，可为空
 	    String nickname;
+	    subUser[] tags;
+	    String[] activeid;
 	    int friendCount; //1,好友数
 	    int videoCount;  //12,视频数
 	    String category; //”家人”, 好友分类只对好友列表有效
@@ -502,7 +506,12 @@ public  class GsonResponse {
 	    int sex; //0男，1女， 2未知
 	    int isattention; // 0 未关注  1是已关注
 	    String signature; //”个性签名” , 是编码的，需要解码
+
 	
+	}
+	
+	public class subUser{
+		String subitem;
 	}
 	
 	
@@ -591,13 +600,109 @@ public  class GsonResponse {
 		
 	}
 	
+	public class TAG{
+		String name; //”标签1”
+		String id; //
+	}
+	
+	
+	public class nearVideoItem {
+
+		//capture net:
+		public String type;
+		public String signature; //base64
+		public String status;
+		public String nickname; //base64
+		public String sex;
+		public String userid; //
+		public String portraiturl;
+		public String videoid;
+		public String filetype;
+		public VideoPath[] videopath;
+		public String longitude; //"125.1234",//分享经度，可能为空
+		public String latitude; //"16.1234”",//分享纬度可能为空
+		public String position; //"东八里庄公交站"  base64
+		public String isforward;
+		public String snscontent; //终于见到演员中的乔丹了, base64
+		public ShareSNS[] sns;
+		public TAG[] tags; //TAG[]
+		public String[] activeid; // --- to modiry !!!!!!!!
+		public String commentcount; //1111,评论数
+		public String forwardcount; //11121, 转发数
+		public String createtime; //"2012-12-26 14:57:25"
+		public String videocontent; //base64
+		public String forward_signature;
+		public String forward_userid;
+		public String forward_portraiturl;
+		public String forward_nickname;
+		public String forward_sex;
+		public String forward_content;
+		public String snscollect_renren;
+		public String snscollect_kaixin;
+		public String enjoycount;
+		public String snscollect_sina; //"123445,"
+		public String snscollect_tencent;
+		public String sharestatus;
+		public String isattention;
+		public String pic_width; //"360"
+		public String pic_height; //"480"
+		public String show_width; //"320"
+		public String show_height; //"427"
+		public String distance; //"0"
+		public String overstatus; //""
+		public String videoname;
+		public String videolength; //"00:00:10"
+		public String iscollect; //"0"
+		public String collectcount; //"0"
+		public String videoimage; //"http://...jpg"
+		public String videosharepath; //"http://...mp4"
+		public String videotimemilli; //"2013-02-04 22:43:57"
+		public String playtimes; //"0"
+		public String orshare; //"1"
+		
+		/// --doc define
+	/*		String userId;
+		String portraitUrl; //http://…jpg,//好友头像URL
+		String nickname; //好友昵称
+		String videoid;  //视频ID
+		String videoimage; //"http://.../123.jpg"
+		String videosharepath; //”http://.../123.mp4”,  //分享的视频连接
+		int videotimeMilli; //11111111,//毫秒数
+		int playtimes; //播放次数
+		String longitude; //"125.1234",//分享经度，可能为空
+		String latitude; //"16.1234”",//分享纬度可能为空
+		int distance; //视频与手机之间的绝对距离，单位：米
+		String videolength; //”1:1:1”
+		
+		//分享信息
+		String snscontent; //终于见到演员中的乔丹了
+		ShareSNS[] sns;
+		String snscollect_sina; //”1231,12312,12312” 所有分享到新浪的微博id
+		String snscollect_tencent; //”12312,1231,12312” // 所有分享到腾讯的微博id
+		
+		//下面的字段在视频详情里用到
+		String position; //"东八里庄公交站"
+		int commentCount; //1111,评论数
+		int forwardCount; //11121, 转发数
+		VideoPath[] videopath;
+		int iscollect; //1：已收藏，0：未收藏
+		TAG[] tags;
+		
+		int pic_width;   //”2131”, 封面本身的宽
+		int pic_height;  //”1231”, 封面本身的高
+		int show_width;  //封面显示的宽
+		int show_height; //封面显示的高
+		String enjoycount; //123123
+	*/
+		
+	}
 
 	
 	//分享信息
 	public class ShareInfo{
 		
 		String snsid; //”111111”,  snstype为0的时候没有值
-		int snstype; // 0 本地  // 1新浪  // 6腾讯
+		String snstype; // 0 本地  // 1新浪  // 6腾讯
 		String weiboid; //”1212121”, snstype为0的时候没有
 	}
 	
@@ -607,10 +712,7 @@ public  class GsonResponse {
 		String videolongpath; //”http://.../123.mp4” 长连接
 	}
 	
-	public class TAG{
-		String id; //
-		String name; //”标签1”
-	}
+
 	
 
 	public class getUserRemindItem{
@@ -708,95 +810,7 @@ public  class GsonResponse {
 		String signature; //”个性签名”  是编码的，需要解码
 	}
 	
-	public class nearVideoItem{
-		//capture net:
-		String type;
-		String signature;
-		String status;
-		String nickname; //base64
-		String sex;
-		String userid; //
-		String portraiturl;
-		String videoid;
-		String filetype;
-		VideoPath[] videopath;
-		String longitude; //"125.1234",//分享经度，可能为空
-		String latitude; //"16.1234”",//分享纬度可能为空
-		String position; //"东八里庄公交站"  base64
-		String isforward;
-		String snscontent; //终于见到演员中的乔丹了, base64
-		ShareSNS[] sns;
-		TAG[] tags;
-		TAG[] activeid; // --- to modiry !!!!!!!!
-		String forwardcount; //11121, 转发数
-		String commentcount; //1111,评论数
-		String createtime; //"2012-12-26 14:57:25"
-		String sound;
-		String forward_signature;
-		String forward_userid;
-		String forward_portraiturl;
-		String forward_nickname;
-		String forward_sex;
-		String forward_content;
-		String snscollect_renren;
-		String snscollect_kaixin;
-		String enjoycount;
-		String snscollect_sina; //"123445,"
-		String snscollect_tencent;
-		String sharestatus;
-		String isattention;
-		String pic_width; //"360"
-		String pic_height; //"480"
-		String show_width; //"320"
-		String show_height; //"427"
-		String distance; //"0"
-		String overstatus; //""
-		String videoname;
-		String videolength; //"00:00:10"
-		String iscollect; //"0"
-		String collectcount; //"0"
-		String videoimage; //"http://...jpg"
-		String videosharepath; //"http://...mp4"
-		String videotimemilli; //"2013-02-04 22:43:57"
-		String playtimes; //"0"
-		String orshare; //"1"
-		
-		/// --doc define
-/*		String userId;
-		String portraitUrl; //http://…jpg,//好友头像URL
-		String nickname; //好友昵称
-		String videoid;  //视频ID
-		String videoimage; //"http://.../123.jpg"
-		String videosharepath; //”http://.../123.mp4”,  //分享的视频连接
-		int videotimeMilli; //11111111,//毫秒数
-		int playtimes; //播放次数
-		String longitude; //"125.1234",//分享经度，可能为空
-		String latitude; //"16.1234”",//分享纬度可能为空
-		int distance; //视频与手机之间的绝对距离，单位：米
-		String videolength; //”1:1:1”
-		
-		//分享信息
-		String snscontent; //终于见到演员中的乔丹了
-		ShareSNS[] sns;
-		String snscollect_sina; //”1231,12312,12312” 所有分享到新浪的微博id
-		String snscollect_tencent; //”12312,1231,12312” // 所有分享到腾讯的微博id
-		
-		//下面的字段在视频详情里用到
-		String position; //"东八里庄公交站"
-		int commentCount; //1111,评论数
-		int forwardCount; //11121, 转发数
-		VideoPath[] videopath;
-		int iscollect; //1：已收藏，0：未收藏
-		TAG[] tags;
-		
-		int pic_width;   //”2131”, 封面本身的宽
-		int pic_height;  //”1231”, 封面本身的高
-		int show_width;  //封面显示的宽
-		int show_height; //封面显示的高
-		String enjoycount; //123123
-*/
-		
-	}
+
 	
 	public class taglistItem{
 		String id;
