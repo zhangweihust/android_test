@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_test);
 		tv1 = (TextView) this.findViewById(R.id.textView1);
 		im1 = (WebImageView) findViewById(R.id.webImage);
 		handler = new MyHandler(this);
